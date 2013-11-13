@@ -41,5 +41,8 @@ public class WallMessageBean {
 		this.datasent = datasent;
 	}
 	
+	public String showAllWallMessages(){
+		return "";
+	}
 	
 }
