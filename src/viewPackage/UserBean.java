@@ -3,11 +3,12 @@ package viewPackage;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import logicPackage.UserHandler;
 
-@ManagedBean
+@ManagedBean(name="userBean")
 @SessionScoped
 public class UserBean implements Serializable{
 	
@@ -61,8 +62,11 @@ public class UserBean implements Serializable{
 	
 	public String doLogin()
 	{
+		UserBean ub = new UserBean();
 		UserHandler uh = new UserHandler();
-		return uh.login(email, password);
+		ub.setEmail(email);
+		ub.setPassword(password);
+		return uh.login(email,password);
 	}	
 	public String redirectRegister()
 	{
@@ -74,6 +78,7 @@ public class UserBean implements Serializable{
 		UserHandler uh = new UserHandler();
 		return uh.register(firstname,lastname,country,password, email);
 	}
+	
 	
 	
 }

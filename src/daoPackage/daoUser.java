@@ -31,6 +31,22 @@ public class daoUser {
 
 		return answer;
 	}
+	
+	public User loginFillBean(String email,String password)
+	{
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+
+		Query query = session
+				.createQuery("FROM User WHERE email = :email AND password = :password");
+		query.setParameter("email", email);
+		query.setParameter("password", password);
+
+		@SuppressWarnings("unchecked")
+		List<User> l = query.list();
+		
+		return l.get(0);
+	}
 
 	public boolean register(String email, String password, String firstname, String lastname, String country)
 	{
