@@ -1,7 +1,11 @@
 package daoPackage;
 
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
+import logicPackage.Friends;
 import logicPackage.User;
 
 import org.hibernate.Query;
@@ -54,13 +58,7 @@ public class daoUser {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		Transaction tx = null;
-		
-//		Query query = session.createQuery("FROM User WHERE email = :email AND password = :password");
-//		query.setParameter("email", email);
-//		query.setParameter("password", password);
-//		query.setParameter("firstname", firstname);
-//		query.setParameter("lastname", lastname);
-//		query.setParameter("lastname", lastname);
+	
 		try
 			{
 			
@@ -85,7 +83,36 @@ public class daoUser {
 		finally {
 		session.close();
 		}
-		
-		
 	}
+	
+	public ArrayList<User> initFriendList(int UserId)
+	{
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		ArrayList<User> userFriends = new ArrayList<User>();
+		try{ //createNativeQuery
+			Query query = session.createQuery("From Friends as friend where friend.userId =:USERID");
+			query.setParameter("USERID", UserId);	
+			
+			@SuppressWarnings("unchecked")
+			List<Friends> friends = (List<Friends>)query.list();
+			
+			for (Friends friend : friends) {
+				query = session.createQuery("From User as u Where u.idUser=:friendId");
+				query.setParameter("friendId", friend.getFriendId());
+				userFriends.add((User)query.uniqueResult());
+			}
+			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			session.close();
+		}
+		return userFriends;
+	}
+	
+	
+	
 }

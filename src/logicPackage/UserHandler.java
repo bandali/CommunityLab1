@@ -1,5 +1,9 @@
 package logicPackage;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
@@ -33,10 +37,10 @@ public class UserHandler {
 			ub.setIdUser(u.getIdUser());
 			ub.setPassword(u.getPassword());
 
-			return "Homepage.xhtml";
+			return "Homepage?faces-redirect=true";
 		}
 		else {
-			return "Login.xhtml";
+			return "Login?faces-redirect=true";
 		}
 	}
 	
@@ -52,7 +56,26 @@ public class UserHandler {
 		else
 		{
 			return "Register.xhtml";
-		}
-		
+		}	
 	}
+	
+	public List<UserBean> initFriendList(int id)
+	{
+		//ArrayList<UserBean> friendList = new ArrayList<>();
+		daoUser du = new daoUser();
+		ArrayList<User> rawFriends = du.initFriendList(id);
+		List<UserBean> beans = new LinkedList<>();
+		for (User user : rawFriends) {
+			UserBean bean = new UserBean();
+			bean.setIdUser(user.getIdUser());
+			bean.setFirstname(user.getFirstname());
+			bean.setLastname(user.getLastname());
+			bean.setEmail(user.getEmail());
+			bean.setCountry(user.getCountry());
+			
+			beans.add(bean);
+		}
+		return beans;
+	}
+	
 }

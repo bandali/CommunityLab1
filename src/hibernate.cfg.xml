@@ -13,6 +13,8 @@
         <property name="show_sql">true</property>
         
         <mapping class="logicPackage.User"></mapping>
+        <mapping class="logicPackage.Friends"></mapping>
+        <mapping class="logicPackage.PrivateMessage"></mapping>
         
     </session-factory>
 </hibernate-configuration>

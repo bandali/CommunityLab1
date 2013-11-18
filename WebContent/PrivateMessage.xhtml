@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">  
+
+<h:head></h:head> 
+<body> 
+<p:panel header="Send Private Messages">
+	
+<h:form> <!-- #{PrivateMessageBean.reciver}-->
+
+<h3>Send to:</h3>
+<p:selectOneMenu value="#{privatemessagebean.reciver}" effect="fade" >    
+            <f:selectItems value="#{userBean.friendList}" var="f" itemLabel="#{f.firstname}" itemValue="#{f.idUser}"/>  
+</p:selectOneMenu>
+<br/>
+<h3>Message:</h3><p:inputTextarea rows="5" cols="15" autoResize="true" value="#{privatemessagebean.privateMessage}"/>  
+<br/><br/>
+	<p:commandButton id="sendPrivateMessage"  value="Send" action="#{privatemessagebean.sendPrivateMessage}" />  
+</h:form>
+
+</p:panel>
+
+
+
+</body> 
+</html>

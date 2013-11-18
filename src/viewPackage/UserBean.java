@@ -1,6 +1,8 @@
 package viewPackage;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -20,8 +22,14 @@ public class UserBean implements Serializable{
 	private String country;
 	private String password; 
 	private String email;
+	private List<UserBean> friendList; 
 	
-	
+	public List<UserBean> getFriendList() {
+		return friendList;
+	}
+	public void setFriendList(List<UserBean> friendList) {
+		this.friendList = friendList;
+	}
 	public int getIdUser() {
 		return idUser;
 	}
@@ -66,11 +74,13 @@ public class UserBean implements Serializable{
 		UserHandler uh = new UserHandler();
 		ub.setEmail(email);
 		ub.setPassword(password);
-		return uh.login(email,password);
+		String s = uh.login(email,password);
+		initFriendList();
+		return s;
 	}	
 	public String redirectRegister()
 	{
-		return "Register";
+		return "Register?faces-redirect=true";
 	}
 	
 	public String register()
@@ -78,7 +88,15 @@ public class UserBean implements Serializable{
 		UserHandler uh = new UserHandler();
 		return uh.register(firstname,lastname,country,password, email);
 	}
+	public String redirectUserProfile()
+	{
+		return "UserProfile?faces-redirect=true";
+	}
 	
+	public void initFriendList(){
+		UserHandler uh = new UserHandler();
+		setFriendList(uh.initFriendList(getIdUser()));
+	}
 	
 	
 }

@@ -7,8 +7,20 @@
 
 <h:head><h1>Welcome #{userBean.firstname}</h1></h:head> 
 <body> 
+<h:form>
+
 <p:commandButton id="knapp4" value="Profile" action="#{userBean.redirectUserProfile}" />
-<p:commandButton id="knapp5" value="Private messages" action="#{messageBean.redirectMessages}" />
-<p:commandButton id="knapp6" value="Friends" action="#{friendBean.redirectFriends}" />	
+</h:form>
+<h:form>
+
+<p:commandButton id="knapp5" value="Private messages" action="#{privatemessagebean.redirectPrivateMessage}" />
+</h:form>
+
+<h:form>
+<p:commandButton id="knapp6" value="Friends" action="#{friendBean.redirectFriends}" />
+</h:form>
+
+<br/>
+
 </body> 
 </html>
