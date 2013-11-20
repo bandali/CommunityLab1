@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
+import logicPackage.MessageHandler;
 import logicPackage.UserHandler;
 
 @ManagedBean(name="userBean")
@@ -22,7 +23,9 @@ public class UserBean implements Serializable{
 	private String country;
 	private String password; 
 	private String email;
-	private List<UserBean> friendList; 
+	private List<UserBean> friendList;
+	private List<WallMessageBean> wallmessages;
+	private List<PrivateMessageBean> pm;
 	
 	public List<UserBean> getFriendList() {
 		return friendList;
@@ -80,7 +83,16 @@ public class UserBean implements Serializable{
 	}	
 	public String redirectRegister()
 	{
+		UserHandler uh = new  UserHandler();
+		uh.reloadWallMessages();
 		return "Register?faces-redirect=true";
+	}
+	
+	public String redirectPrivateMessage()
+	{
+		MessageHandler mh = new MessageHandler();
+		this.setPm(mh.initPrivateMessages(this.idUser));
+		return "PrivateMessage?faces-redirect=true";
 	}
 	
 	public String register()
@@ -97,6 +109,17 @@ public class UserBean implements Serializable{
 		UserHandler uh = new UserHandler();
 		setFriendList(uh.initFriendList(getIdUser()));
 	}
-	
+	public List<WallMessageBean> getWallmessages() {
+		return wallmessages;
+	}
+	public void setWallmessages(List<WallMessageBean> wallmessages) {
+		this.wallmessages = wallmessages;
+	}
+	public List<PrivateMessageBean> getPm() {
+		return pm;
+	}
+	public void setPm(List<PrivateMessageBean> pm) {
+		this.pm = pm;
+	}
 	
 }

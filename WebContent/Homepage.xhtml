@@ -9,15 +9,15 @@
 <body> 
 <h:form>
 
-<p:commandButton id="knapp4" value="Profile" action="#{userBean.redirectUserProfile}" />
-</h:form>
-<h:form>
+<p:commandButton id="knapp4" value="My Profile" action="#{userBean.redirectUserProfile}" />
 
-<p:commandButton id="knapp5" value="Private messages" action="#{privatemessagebean.redirectPrivateMessage}" />
+<p:commandButton id="knapp5" value="Private messages" action="#{userBean.redirectPrivateMessage}" />
+
 </h:form>
 
 <h:form>
-<p:commandButton id="knapp6" value="Friends" action="#{friendBean.redirectFriends}" />
+<p:inputText id="friendKey" required="true" label="Friendname" value="#{profileBean.firstname}"></p:inputText>
+<p:commandButton id="friendsSeachButton" value="Search for friend"  action="#{profileBean.showProfile}"></p:commandButton>
 </h:form>
 
 <br/>

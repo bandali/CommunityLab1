@@ -5,25 +5,23 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"> 
 
-<h:head><h1></h1></h:head> 
+<h:head></h:head> 
 <body> 
-<p:panel header="#{userBean.firstname}  #{userBean.lastname}" style="width:300px; height:300px;">
-<!--<h:panelGrid columns="2" id="matchGrid">  --> 
+<p:panel header="#{profileBean.firstname}  #{profileBean.lastname}" style="width:300px; height:300px;">
+ 
 <h2>Details</h2>
-Email: #{userBean.email}<br/>
-Country: #{userBean.country}
-        
-<!--   </h:panelGrid> -->  
+Email: #{profileBean.email}<br/>
+Country: #{profileBean.country}
 </p:panel>
 <h:form>
 
 <h3>Message:</h3><p:inputTextarea rows="5" cols="15" autoResize="true" value="#{wallmessageBean.wallMessage}"/>  
 <br/><br/>
-	<p:commandButton id="sendMessage"  value="Send" action="#{wallmessageBean.SendWallMessage(userBean.idUser,userBean.idUser)}" />  
+	<p:commandButton id="sendPrivateMessage"  value="Send" action="#{wallmessageBean.SendWallMessage(userBean.idUser,profileBean.idUser)}" />  
 </h:form>
 <p:panel header="Messages">
 
-<p:dataTable var="loop" value="#{userBean.wallmessages}">
+<p:dataTable var="loop" value="#{profileBean.wallmessages}">
 		
 		<p:column headerText="Sender">  
             <h:outputText value="#{loop.senderName}" />  
@@ -37,6 +35,5 @@ Country: #{userBean.country}
 
 </p:panel>
 
-<br/>
 </body> 
 </html>

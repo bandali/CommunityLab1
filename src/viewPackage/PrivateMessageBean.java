@@ -1,19 +1,23 @@
 package viewPackage;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import logicPackage.MessageHandler;
 
+
 @ManagedBean(name="privatemessagebean")
 @SessionScoped
 public class PrivateMessageBean {
+	private String senderName;
 	private int sender;
 	private int reciver;
 	private String privateMessage;
 	private Timestamp datasent;
+	private List<PrivateMessageBean> pms;
 	
 	public int getSender() {
 		return sender;
@@ -40,18 +44,26 @@ public class PrivateMessageBean {
 		this.datasent = datasent;
 	}
 	
-	public String redirectPrivateMessage()
-	{
-		return "PrivateMessage?faces-redirect=true";
-	}
+
 	
 	
 	public String sendPrivateMessage()
 	{
-		
 		System.out.println("help");
 		MessageHandler mh = new MessageHandler();
 		return mh.sendPrivateMessage(reciver, privateMessage);
-	
 	}
+	public List<PrivateMessageBean> getPms() {
+		return pms;
+	}
+	public void setPms(List<PrivateMessageBean> pms) {
+		this.pms = pms;
+	}
+	public String getSenderName() {
+		return senderName;
+	}
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
+	}
+	
 }

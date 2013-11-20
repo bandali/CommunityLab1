@@ -2,20 +2,22 @@ package viewPackage;
 
 import java.sql.Timestamp;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+import logicPackage.MessageHandler;
+
+@ManagedBean(name="wallmessageBean")
+@SessionScoped
 public class WallMessageBean {
 
-	private String WallMessages;
+	
 	private int sender;
 	private int reciver;
+	private String senderName;
 	private String wallMessage;
 	private Timestamp datasent;
 	
-	public String getWallMessages() {
-		return WallMessages;
-	}
-	public void setWallMessages(String wallMessages) {
-		WallMessages = wallMessages;
-	}
 	public int getSender() {
 		return sender;
 	}
@@ -40,9 +42,22 @@ public class WallMessageBean {
 	public void setDatasent(Timestamp datasent) {
 		this.datasent = datasent;
 	}
-	
-	public String showAllWallMessages(){
-		return "";
+	public String getSenderName() {
+		return senderName;
+	}
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
 	}
 	
+	public String SendWallMessage(int sender,int reciever)
+	{
+		MessageHandler mh = new MessageHandler();
+		if(mh.SendWallMessage(wallMessage, sender, reciever))
+		{
+			return "Homepage?faces-redirect=true";
+		}
+		else{
+			return "Profile?faces-redirect=true";
+		}
+	}
 }

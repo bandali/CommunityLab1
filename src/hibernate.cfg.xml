@@ -15,6 +15,7 @@
         <mapping class="logicPackage.User"></mapping>
         <mapping class="logicPackage.Friends"></mapping>
         <mapping class="logicPackage.PrivateMessage"></mapping>
+        <mapping class="logicPackage.WallMessages"></mapping>
         
     </session-factory>
 </hibernate-configuration>

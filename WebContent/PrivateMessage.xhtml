@@ -9,7 +9,7 @@
 <body> 
 <p:panel header="Send Private Messages">
 	
-<h:form> <!-- #{PrivateMessageBean.reciver}-->
+<h:form> 
 
 <h3>Send to:</h3>
 <p:selectOneMenu value="#{privatemessagebean.reciver}" effect="fade" >    
@@ -23,6 +23,24 @@
 
 </p:panel>
 
+<p:panel header="Private Messages">
+
+<p:dataTable var="loop" value="#{userBean.pm}">
+		
+		<p:column headerText="Sender">  
+            <h:outputText value="#{loop.senderName}" />  
+        </p:column>  
+  
+        <p:column headerText="Message">  
+            <h:outputText value="#{loop.privateMessage}" />  
+        </p:column>  
+  
+        <!-- <p:column headerText="Date">  
+            <h:outputText value="#{loop.dateSent}" />  
+        </p:column>-->  
+</p:dataTable>
+
+</p:panel>
 
 
 </body> 

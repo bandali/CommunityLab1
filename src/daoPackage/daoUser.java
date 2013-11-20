@@ -32,7 +32,6 @@ public class daoUser {
 				&& l.get(0).getPassword().compareTo(password) == 0) {
 			answer = true;
 		}
-
 		return answer;
 	}
 	
@@ -102,7 +101,6 @@ public class daoUser {
 				query.setParameter("friendId", friend.getFriendId());
 				userFriends.add((User)query.uniqueResult());
 			}
-			
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -113,6 +111,41 @@ public class daoUser {
 		return userFriends;
 	}
 	
+	public String getUserNameById(int id){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		User user = new User();
+		String name = "";
+		try{
+			Query query = session.createQuery("From User as u where u.idUser =:USERID");
+			query.setParameter("USERID", id);
+			user = (User) query.uniqueResult();
+			name = user.getFirstname();
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+		return name;
+	}
 	
+	public User getFriendbyName(String name){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		User user = new User();
+		try{
+			Query query = session.createQuery("From User as u where u.firstname=:Name or u.lastname=:Name");
+			query.setParameter("Name", name);
+			user = (User) query.uniqueResult();
+			
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+		return user;
+	}
 	
 }

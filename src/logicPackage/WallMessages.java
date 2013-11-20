@@ -1,21 +1,24 @@
 package logicPackage;
 
 import static javax.persistence.GenerationType.IDENTITY;
+
 import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name="Messages")
-public class PrivateMessage {
-	
+@Table(name="WallMessages")
+public class WallMessages {
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "idMessages")
-	private int idMessage;
+	@Column(name = "idWallMessages")
+	private int idWallMessages;
 	
 	@Column(name = "sender")
 	private int sender;
@@ -23,18 +26,17 @@ public class PrivateMessage {
 	@Column(name = "reciever")
 	private int reciever;
 	
-	@Column(name = "message")
-	private String privateMessage;
+	@Column(name = "wallMessage")
+	private String wallMessage;
 	
 	@Column(name = "dateSent")
 	private Timestamp datasent;
 	
-	
 	public int getIdMessage() {
-		return idMessage;
+		return idWallMessages;
 	}
 	public void setIdMessage(int idMessage) {
-		this.idMessage = idMessage;
+		this.idWallMessages = idMessage;
 	}
 	
 	public int getSender() {
@@ -49,11 +51,11 @@ public class PrivateMessage {
 	public void setReciever(int reciver) {
 		this.reciever = reciver;
 	}
-	public String getPrivateMessage() {
-		return privateMessage;
+	public String getWallMessages() {
+		return wallMessage;
 	}
-	public void setPrivateMessage(String privateMessage) {
-		this.privateMessage = privateMessage;
+	public void setWallMessages(String privateMessage) {
+		this.wallMessage = privateMessage;
 	}
 	public Timestamp getDatasent() {
 		return datasent;
@@ -61,6 +63,4 @@ public class PrivateMessage {
 	public void setDatasent(Timestamp datasent) {
 		this.datasent = datasent;
 	}
-	
-	
 }
